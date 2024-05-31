@@ -152,7 +152,7 @@ function backToGetMoney() {
 function clickGetMoneyButton(waitSeconds) {
     var waitTillSeconds = (new Date()).getTime() + waitSeconds*1000;
 
-    var focusOnButton = id("hrp");
+    var focusOnButton = id("hwd");
     if (focusOnButton.exists() && needFocusOn) {
         focusOnButton.findOne().click();
         sleep(500);
@@ -283,6 +283,8 @@ while(true){
         //发表评论抢福袋，需判断是否是只发表评论就行
         var commonPublishControlFind = text("去发表评论");
         var funsNecessary = text("加入粉丝团").exists();
+        var funsLevelExist = textStartsWith("粉丝团点亮且达到").exists();
+        funsNecessary |= funsLevelExist;
         var percentMeet = getPercent() > minInQueuePercent;
         var leftTimeMeet = leftSeconds < maxRemainTime;
         if (commonPublishControlFind.exists() && !funsNecessary && percentMeet && leftTimeMeet) {
